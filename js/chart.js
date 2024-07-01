@@ -1,12 +1,54 @@
 'use strict';
 
-let canvasElem = document.getElementById('chart')
-
-
 function renderChart() {
+  let state = new AppState();
+  state.loadItems();
+
+  let productNames = state.allProducts.map(product => product.name);
+  let productClicks = state.allProducts.map(product => product.timesClicked);
+  let productViews = state.allProducts.map(product => product.timesShown);
+
+  // Define color variables
+  const voteColor = 'rgba(255, 99, 132, 0.2)';
+  const voteBorderColor = 'rgba(255, 99, 132, 1)';
+  const viewColor = 'rgba(76, 175, 80, 0.2)';
+  const viewBorderColor = 'rgba(76, 175, 80, 1)';
+
+  let ctx = document.getElementById('chart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: productNames,
+      datasets: [
+        {
+          label: 'Votes',
+          data: productClicks,
+          backgroundColor: voteColor,
+          borderColor: voteBorderColor,
+          borderWidth: 1
+        },
+        {
+          label: 'Views',
+          data: productViews,
+          backgroundColor: viewColor,
+          borderColor: viewBorderColor,
+          borderWidth: 1
+        }
+      ]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
 }
 
-renderChart();
+document.addEventListener('DOMContentLoaded', renderChart);
+
+
 
 /* TODO:
  * - Instantiate a new AppState
