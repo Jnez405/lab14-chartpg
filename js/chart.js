@@ -2,6 +2,12 @@
 
 let canvasElem = document.getElementById('chart')
 
+
+function renderChart() {
+}
+
+renderChart();
+
 /* TODO:
  * - Instantiate a new AppState
  * - Use a method on that AppState to load vote data from localStorage.
@@ -10,7 +16,3 @@ let canvasElem = document.getElementById('chart')
  * - Call chart.js with the configuration and the canvasElem
  *
  */
-function renderChart() {
-}
-
-renderChart();
